@@ -1,0 +1,565 @@
+/* ============================================================
+   Noor Jewellers — Image Gallery Stylesheet
+============================================================ */
+
+/* ---------- Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --rose:      #b06a72;
+  --rose-dark: #96555e;
+  --rose-soft: #f4e3e5;
+  --cream:     #faf6f0;
+  --card:      #ffffff;
+  --ink:       #3e332b;
+  --muted:     #8b7d6f;
+  --line:      #eee3d5;
+  --radius:    16px;
+  --shadow-sm: 0 4px 14px rgba(62, 51, 43, 0.07);
+  --shadow-lg: 0 18px 38px rgba(62, 51, 43, 0.16);
+  --ease:      cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+img { display: block; }
+body.no-scroll { overflow: hidden; }
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  text-align: center;
+  padding: 26px 20px 20px;
+  background: #fffdf9;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.logo-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--rose-soft);
+  color: var(--rose);
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+}
+
+.logo-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.logo-text > span:last-child {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   PAGE HEADING
+============================================================ */
+.gallery-head {
+  text-align: center;
+  padding: 52px 20px 6px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 12px;
+}
+
+.gallery-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600;
+}
+
+.gallery-head h2 em { color: var(--rose); }
+
+.gallery-head p {
+  max-width: 540px;
+  margin: 12px auto 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ============================================================
+   FILTER BAR (BONUS)
+============================================================ */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px 20px 6px;
+}
+
+.filter-btn {
+  padding: 9px 22px;
+  border: 1.5px solid #e7d9ca;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--rose);
+  color: var(--rose);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(176, 106, 114, 0.15);
+}
+
+.filter-btn.active {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(176, 106, 114, 0.35);
+}
+
+.results-text {
+  text-align: center;
+  padding-top: 14px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+/* ============================================================
+   GALLERY GRID
+============================================================ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 24px 60px;
+}
+
+/* ---------- Card ---------- */
+.gallery-item {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.35s var(--ease),
+              box-shadow 0.35s var(--ease),
+              opacity 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---------- Image area ---------- */
+.img-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.gallery-item:hover .img-wrap img { transform: scale(1.08); }
+
+/* ---------- Hover overlay ---------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 18px;
+  background: linear-gradient(to top, rgba(40, 25, 20, 0.55), rgba(40, 25, 20, 0.05) 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover .overlay { opacity: 1; }
+
+.view-pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transform: translateY(12px);
+  transition: transform 0.4s var(--ease);
+}
+
+.gallery-item:hover .view-pill { transform: translateY(0); }
+
+/* ---------- Badge + wishlist heart ---------- */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--rose-dark);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.wish-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #b9a99a;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover .wish-btn { opacity: 1; transform: scale(1); }
+.wish-btn:hover  { transform: scale(1.15); }
+.wish-btn.active { color: var(--rose); }
+
+/* ---------- Card caption ---------- */
+.item-info { padding: 14px 16px 16px; }
+
+.item-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.price {
+  color: var(--rose);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+/* ---------- Filter show / hide animation ---------- */
+.gallery-item.is-hidden { display: none; }
+.gallery-item.fade-out  { opacity: 0; transform: scale(0.9); }
+
+.gallery-item.pop {
+  animation: popIn 0.5s var(--ease) backwards;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* ============================================================
+   LIGHTBOX
+============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease;
+}
+
+.lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(35, 24, 20, 0.88);
+  backdrop-filter: blur(5px);
+}
+
+.lb-content {
+  position: relative;
+  width: min(860px, 100%);
+  background: var(--card);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  transform: scale(0.92) translateY(14px);
+  transition: transform 0.35s var(--ease);
+}
+
+.lightbox.open .lb-content { transform: none; }
+
+/* ---------- Main image ---------- */
+.lb-stage { position: relative; }
+
+#lbImage {
+  width: 100%;
+  height: min(62vh, 540px);
+  object-fit: contain;
+  background: #efe6db;
+  transition: opacity 0.3s ease;
+}
+
+#lbImage.fading { opacity: 0; }
+
+.lb-counter {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+}
+
+/* ---------- Caption ---------- */
+.lb-caption {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  padding: 16px 20px 18px;
+}
+
+.lb-badge {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--rose-soft);
+  color: var(--rose-dark);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.lb-caption h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.lb-price {
+  margin-left: auto;
+  color: var(--rose);
+  font-weight: 600;
+}
+
+/* ---------- Arrows / close ---------- */
+.lb-arrow {
+  position: absolute;
+  top: 42%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.lb-arrow:hover  { background: var(--rose); color: #fff; }
+.lb-arrow:active { transform: translateY(-50%) scale(0.92); }
+.lb-prev { left: 14px; }
+.lb-next { right: 14px; }
+
+.lb-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 6;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.lb-close:hover {
+  background: var(--rose);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+/* ---------- Thumbnails ---------- */
+.lb-thumbs {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px 18px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.lb-thumbs::-webkit-scrollbar { height: 6px; }
+.lb-thumbs::-webkit-scrollbar-thumb { background: #d9c9bd; border-radius: 3px; }
+
+.lb-thumb {
+  flex: 0 0 auto;
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.lb-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.lb-thumb:hover { opacity: 1; transform: translateY(-2px); }
+.lb-thumb.active { border-color: var(--rose); opacity: 1; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  text-align: center;
+  padding: 26px 20px 34px;
+  background: #fffdf9;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+/* ---------- Tablets ---------- */
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 26px 16px 10px;
+    scrollbar-width: none;
+  }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-btn { flex: 0 0 auto; }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 16px;
+    padding: 16px 16px 48px;
+  }
+
+  /* hearts stay visible on touch screens */
+  .wish-btn { opacity: 1; transform: scale(1); }
+
+  #lbImage  { height: 42vh; }
+  .lb-arrow { width: 38px; height: 38px; font-size: 0.9rem; }
+  .lb-thumb { width: 50px; height: 50px; }
+  .lb-caption { padding: 14px 16px 16px; }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 480px) {
+  .logo-text h1 { font-size: 1.4rem; }
+  .gallery-head { padding-top: 38px; }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .item-info { padding: 10px 12px 12px; }
+  .item-info h3 { font-size: 0.88rem; }
+  .price { font-size: 0.82rem; }
+
+  .badge {
+    top: 8px;
+    left: 8px;
+    font-size: 0.58rem;
+    padding: 4px 9px;
+  }
+
+  .wish-btn {
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
